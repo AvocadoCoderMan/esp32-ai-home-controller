@@ -87,7 +87,7 @@ try:
                     print("Silence detected! Stopping stream.")
                     sock.sendto(b"STOP", addr) 
                     recording = False
-                    current_state = SystemState.THINKING
+                    current_state = SystemState.THINKING_SPEAKING
                     # e.g., threading.Thread(target=process_audio, args=(audio_buffer,)).start()
         
         elif current_state == SystemState.INPUT_READY:

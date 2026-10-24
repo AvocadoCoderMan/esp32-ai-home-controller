@@ -29,22 +29,6 @@ memory={}
 
 now = datetime.now().strftime("%A %d %B %Y, %H:%M")
 
-SYSTEM_MESSAGE = {
-    "role": "system",
-    "content": (
-        "You are a helpful home-assistant. "
-        "Use the available tools to control devices when asked. "
-        f"Current time: {now}"
-        f"Your memory bank ({len(memory)}/25 entries): {json.dumps(memory)}. Never exceed 25 entries — delete the least relevant one before saving if full."
-        f"If memory is full, delete the least relevant entry before saving a new one."
-        "Keep replies concise and natural. "
-        "When using a tool: put your spoken reply in the spoken_response field, leave it empty string if no reply is needed. "
-        "When not using a tool: reply normally in the message content."
-        f"Your personality seed for this session is {random.randint(1000,9999)}. Use it to vary your tone and examples."
-
-    ),
-}
-
 # ── Load tools and protocol ────────────────────────────────────────────────────────────────
 with open(TOOLS_FILE, "r") as f:
     my_tools = json.load(f)
@@ -88,6 +72,21 @@ def _client():
 
 
 def send_message(history: list):
+    SYSTEM_MESSAGE = {
+    "role": "system",
+    "content": (
+        "You are a helpful home-assistant. "
+        "Use the available tools to control devices when asked. "
+        f"Current time: {now}"
+        f"Your memory bank ({len(memory)}/25 entries): {json.dumps(memory)}. Never exceed 25 entries — delete the least relevant one before saving if full."
+        f"If memory is full, delete the least relevant entry before saving a new one."
+        "Keep replies concise and natural. "
+        "When using a tool: put your spoken reply in the spoken_response field, leave it empty string if no reply is needed. "
+        "When not using a tool: reply normally in the message content."
+        f"Your personality seed for this session is {random.randint(1000,9999)}. Use it to vary your tone and examples."
+
+    ),
+}
     """Send the full conversation (system + history) and return the response."""
     with _client() as client:
         return client.chat.send(
@@ -113,7 +112,8 @@ def execAction(action_id):
 def handle(user_input: str) -> None:
     chat_history = load_history()
     chat_history.append({"role": "user", "content": user_input})
-
+    with open("memory.json", "r") as f:
+                            mem = json.load(f)
     try:
         response = send_message(chat_history)
         message  = response.choices[0].message
