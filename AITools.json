@@ -1,0 +1,71 @@
+[
+  {
+    "type": "function",
+    "function": {
+      "name": "trigger_smart_home",
+      "description": "PRIMARY TOOL. Immediately control any smart home device you have access to. Use this for any device control request (call multiple times simultaneously to control many devices at once). Don't use if the user explicitly wants a delay or scheduled time.",
+      "strict": true,
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "action_id": {
+            "type": "string",
+            "description": "The exact device and state to trigger.",
+            "enum": [
+              "corner_light_on",
+              "corner_light_off",
+              "desk_power_on",
+              "desk_power_off"
+            ]
+          },
+          "spoken_response": {
+            "type": "string",
+            "description": "What to say out loud to the user. If a response is necessary, always put any reply, joke, answer, or confirmation here. Never put a reply anywhere else when using a tool."
+          }
+        },
+        "required": ["action_id", "spoken_response"],
+        "additionalProperties": false
+      }
+    }
+  },
+  {
+  "type": "function",
+  "function": {
+    "name": "save_memory",
+    "description": "Save something worth remembering about the user for future conversations. Only call this when you learn something genuinely useful to remember long-term.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Short identifier e.g. 'favorite_color', 'wake_up_time', 'prefers_short_replies'"
+        },
+        "value": {
+          "type": "string",
+          "description": "What to remember"
+        }
+      },
+      "required": ["key", "value"],
+      "additionalProperties": false
+    }
+  }
+},
+{
+  "type": "function",
+  "function": {
+    "name": "delete_memory",
+    "description": "Delete a specific memory entry by key if it's wrong or no longer relevant.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The exact key to delete from memory."
+        }
+      },
+      "required": ["key"],
+      "additionalProperties": false
+    }
+  }
+}
+]
