@@ -1,4 +1,4 @@
-# Hermes: Self-Hosted Voice-Controlled Smart Home
+# Self-Hosted Voice-Controlled Smart Home
 
 A privacy-conscious, DIY smart home assistant. Say a wake word to a small ESP32 microphone node, speak naturally, and a local Python server transcribes your request, lets an LLM decide what to do, and switches real devices over ESP-NOW. The assistant also keeps a small long-term memory, so it remembers facts about you between sessions.
 
