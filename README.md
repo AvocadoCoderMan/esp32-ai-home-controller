@@ -14,7 +14,7 @@ A privacy-conscious, DIY smart home assistant. Say a wake word to a small ESP32 
 - **Persistent memory.** The assistant stores and forgets key/value facts in `memory.json`, capped at 25 entries. The model prunes the least relevant one when the bank is full.
 - **Short-term conversation history.** The last 20 messages are kept and expire after 30 minutes of inactivity.
 - **Wireless device control.** A USB-attached ESP32 "antenna" bridges the host to devices using ESP-NOW, so there is no Wi-Fi setup, cloud or hub per device.
-- **Alternative trigger: double snap.** `eavesdropper.py` detects a double finger-snap by analysing the 15–20 kHz band with an FFT. However false positives are common using this method.
+- **Alternative trigger: double snap.** `eavesdropper.py` detects a double finger-snap by analysing the 15–20 kHz band with an FFT.
 - **Built-in audio hosting.** A tiny HTTP server serves generated speech WAV files to the ESP32's media player.
 
 ## Architecture
@@ -199,6 +199,3 @@ python main.py
 
 Python · WebRTC VAD · NumPy (FFT) · PyAudio · PySerial · OpenRouter API · Gemini 2.5 Flash · ESP32 · ESP-NOW · UDP/HTTP networking
 
-## License
-
-Add a license of your choice (for example MIT) before publishing.
