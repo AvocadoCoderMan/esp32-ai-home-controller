@@ -1,3 +1,12 @@
+"""
+audio_server.py - tiny HTTP file server for the assistant's spoken replies.
+
+Serves ./audio_output on port 5000 (TCP) so the ESP32 can download and play
+the generated TTS .wav files. Started in a daemon thread by main.py.
+
+Note: os.chdir() changes the working directory of the whole process, so use
+absolute paths elsewhere.
+"""
 import http.server
 import socketserver
 import os

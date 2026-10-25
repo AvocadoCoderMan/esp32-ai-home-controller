@@ -1,3 +1,14 @@
+"""
+runDevice.py - send one command to a smart-home device.
+
+Usage:  python runDevice.py <target_mac> <command_code>
+
+Writes "MAC|CODE\n" over USB serial (/dev/ttyACM0, 115200 baud) to the ESP32
+"antenna", which forwards it to the target device via ESP-NOW.
+MAC addresses and command codes are defined in Protocol.json.
+AI.py starts this script as a subprocess for each device action.
+"""
+
 import serial
 import time,sys
 import json

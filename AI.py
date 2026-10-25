@@ -1,3 +1,18 @@
+"""
+AI.py - LLM "brain" of the home assistant.
+
+Takes one line of user text (from STT, later) and asks an LLM (Gemini via
+OpenRouter) what to do. The model can answer in plain text or call tools:
+  - trigger_smart_home: switch a device (calls runDevice.py)
+  - save_memory / delete_memory: edit the persistent key-value memory (memory.json)
+
+Chat history is stored in chatHistory.json and expires after 30 minutes.
+Tool and device IDs come from AITools.json and the ESP32 Protocol.json.
+
+Status: works standalone (see __main__ test). Not yet connected to main.py,
+and the reply is only printed, not yet sent to TTS.
+"""
+
 '''
 other AIs:
 gemini-2.5-flash — best tool-call accuracy at low cost, fastest

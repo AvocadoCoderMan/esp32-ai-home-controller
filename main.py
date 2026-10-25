@@ -1,3 +1,18 @@
+"""
+main.py - host-side entry point for the voice pipeline.
+
+Listens on UDP port 5000 for audio streamed by the ESP32 and runs a state
+machine: IDLE -> LISTENING -> INPUT_READY -> THINKING_SPEAKING (+ SHUTDOWN).
+Control messages from the ESP32: START (wake word heard), STOP (stream closed
+after the 15 s timeout), SHUTDOWN (failsafe).
+While listening, 30 ms frames (960 bytes at 16 kHz) go through WebRTC VAD.
+After 1.5 s of silence the host sends STOP back to the ESP32.
+Also starts audio_server.py in a background thread.
+
+Status: wake word, streaming and silence detection are done. Still TODO:
+saving the WAV and STT, calling AI.py, TTS, and interrupting speech.
+"""
+
 import socket, threading
 import wave
 import webrtcvad

@@ -1,3 +1,5 @@
+# only use if you dont have a openwakeword and want to startup with a finger snap instead
+
 import pyaudio
 import numpy as np
 import time
